@@ -1,10 +1,10 @@
-name: Scheduled Weather Updates
+name: Scheduled Weather Updates (Morning)
 
 on:
   workflow_dispatch:
   schedule:
     # Run at 8am, 12pm, and 8pm Singapore time (UTC+8)
-    - cron: '*/5 * * * *'
+    - cron: '0 12 * * *'
 
 jobs:
   send-weather:
@@ -30,4 +30,4 @@ jobs:
         WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         CITY: ${{ secrets.CITY }}
       run: |
-        python main.py evening
+        python main.py Morning

@@ -1,0 +1,33 @@
+name: Scheduled Weather Updates (Afternoon)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run at 8am, 12pm, and 8pm Singapore time (UTC+8)
+    - cron: '0 12 * * *'
+
+jobs:
+  send-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run weather script
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        USER_ID: ${{ secrets.USER_ID }}
+        WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        CITY: ${{ secrets.CITY }}
+      run: |
+        python main.py afternoon
