@@ -31,4 +31,4 @@ jobs:
         WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         CITY: ${{ secrets.CITY }}
       run: |
-        python send_weather.py evening
+        python main.py evening
