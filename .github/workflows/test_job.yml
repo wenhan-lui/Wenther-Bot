@@ -3,17 +3,12 @@ name: Scheduled Weather Updates
 on:
   schedule:
     # Run at 8am, 12pm, and 8pm Singapore time (UTC+8)
-    - cron: '0 0 * * *'   # 8:00 AM SGT (00:00 UTC)
-    - cron: '0 4 * * *'   # 12:00 PM SGT (04:00 UTC)
-    - cron: '0 12 * * *'  # 8:00 PM SGT (12:00 UTC)
+    - cron: '15 12 * * * '
+    - cron: '25 12 * * *'
 
 jobs:
   send-weather:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        period: [morning, afternoon, evening]
 
     steps:
     - uses: actions/checkout@v3
@@ -35,4 +30,4 @@ jobs:
         WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         CITY: ${{ secrets.CITY }}
       run: |
-        python send_weather.py ${{ matrix.period }}
+        python send_weather.py evening
