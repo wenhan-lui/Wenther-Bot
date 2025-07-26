@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # Run at 8am, 12pm, and 8pm Singapore time (UTC+8)
-    - cron: '36 13 * * *'
-    - cron: '39 13 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   send-weather:
